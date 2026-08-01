@@ -28,10 +28,10 @@
   // 3. Leave src as "" to keep the tap-to-upload placeholder instead
   // ============================================================
   const photos = [
-    { src: 'us.jpg', caption: 'us, on a good day' },
-    { src: 'pl.jpg', caption: 'that one place we loved' },
+    { src: 'Us.jpg', caption: 'us, on a good day' },
+    { src: 'Pl.jpg', caption: 'that one place we loved' },
     { src: 'Silly.jpg', caption: "silly Me, don't judge" },
-    { src: 'Favourite.jpg', caption: 'my favorite' }
+    { src: 'Favourite .jpg', caption: 'my favorite' }
   ];
 
   const scrapbook = document.getElementById('scrapbook');
