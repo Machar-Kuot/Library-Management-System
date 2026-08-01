@@ -1,1 +1,172 @@
-kuog
+:root{
+    --bg:#2b1b2e;
+    --bg2:#3d2438;
+    --rose:#c97b84;
+    --gold:#e8c170;
+    --ivory:#f5e9dc;
+    --mauve:#a98a97;
+    --blush:#f2a6b0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:linear-gradient(180deg, #241723 0%, #2b1b2e 30%, #3d2438 70%, #2b1b2e 100%);
+    color:var(--ivory);
+    font-family:'Jost', sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ambient petals */
+  #petals{position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;}
+  .petal{
+    position:absolute; top:-5%; font-size:14px; opacity:0.55;
+    animation:fall linear infinite;
+    color:var(--blush);
+  }
+  @keyframes fall{
+    0%{transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0;}
+    10%{opacity:0.6;}
+    90%{opacity:0.5;}
+    100%{transform:translateY(110vh) translateX(var(--drift,20px)) rotate(200deg); opacity:0;}
+  }
+
+  section{position:relative; z-index:2; padding:8vh 6vw; max-width:720px; margin:0 auto;}
+
+  /* ---- Letter section ---- */
+  #letter-section{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  }
+  .eyebrow{
+    font-family:'Jost', sans-serif; letter-spacing:0.3em; text-transform:uppercase;
+    font-size:0.7rem; color:var(--mauve); margin-bottom:1.4rem;
+  }
+  .envelope-wrap{
+    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+    display:flex; flex-direction:column; align-items:center; gap:1.2rem;
+  }
+  .envelope{
+    width:min(78vw, 260px); height:min(52vw, 170px);
+    position:relative; background:var(--bg2);
+    border:1px solid rgba(232,193,112,0.35);
+    border-radius:6px;
+    box-shadow:0 20px 40px -18px rgba(0,0,0,0.6);
+    transition:transform 0.4s ease;
+  }
+  .envelope-wrap:active .envelope{transform:scale(0.97);}
+  .flap{
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    background:linear-gradient(135deg, var(--rose), #b3616c);
+    clip-path:polygon(0 0, 50% 55%, 100% 0);
+    transform-origin:top;
+    transition:transform 0.7s cubic-bezier(.6,.1,.2,1);
+    border-radius:6px 6px 0 0;
+  }
+  .envelope.open .flap{transform:rotateX(180deg);}
+  .seal{
+    position:absolute; top:38%; left:50%; transform:translate(-50%,-50%);
+    width:34px; height:34px; border-radius:50%;
+    background:var(--gold); color:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Caveat', cursive; font-weight:700; font-size:1.1rem;
+    box-shadow:0 4px 10px rgba(0,0,0,0.35);
+    z-index:3; transition:opacity 0.3s ease;
+  }
+  .envelope.open .seal{opacity:0; pointer-events:none;}
+  .tap-hint{font-size:0.85rem; color:var(--mauve); font-style:italic;}
+  .envelope.open ~ .tap-hint{opacity:0;}
+
+  .letter{
+    margin-top:2.5rem; max-width:540px;
+    opacity:0; transform:translateY(16px);
+    transition:opacity 0.8s ease 0.35s, transform 0.8s ease 0.35s;
+    text-align:left;
+  }
+  .letter.show{opacity:1; transform:translateY(0);}
+  .letter p{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.15rem, 4vw, 1.45rem); line-height:1.75; color:var(--ivory);
+    margin-bottom:1.1rem;
+  }
+  .letter .signature{
+    font-family:'Caveat', cursive; font-size:2rem; color:var(--gold);
+    margin-top:1.5rem; text-align:right; font-style:normal;
+  }
+
+  /* ---- Divider ---- */
+  .divider{
+    display:flex; align-items:center; gap:1rem; padding:4vh 6vw; max-width:520px; margin:0 auto;
+  }
+  .divider .line{flex:1; height:1px; background:rgba(245,233,220,0.2);}
+  .divider span{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.1rem; color:var(--rose); white-space:nowrap;
+  }
+
+  /* ---- Celebration section ---- */
+  #celebrate h2{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.8rem, 6vw, 2.6rem); text-align:center; color:var(--gold); margin-bottom:0.6rem;
+  }
+  #celebrate .sub{
+    text-align:center; color:var(--mauve); font-size:0.95rem; margin-bottom:4rem; letter-spacing:0.02em;
+  }
+
+  .scrapbook{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:2.2rem 1.4rem;
+    margin-bottom:3rem;
+  }
+  @media (max-width:480px){ .scrapbook{grid-template-columns:1fr 1fr; gap:1.8rem 1rem;} }
+
+  .polaroid{
+    background:var(--ivory); padding:10px 10px 34px 10px; border-radius:2px;
+    box-shadow:0 14px 26px -12px rgba(0,0,0,0.55);
+    transform:rotate(var(--rot,-3deg));
+    position:relative; cursor:pointer; transition:transform 0.25s ease;
+  }
+  .polaroid:nth-child(2n){--rot:2.5deg;}
+  .polaroid:nth-child(3n){--rot:-1.5deg;}
+  .polaroid:hover{transform:rotate(0deg) scale(1.03);}
+  .polaroid .tape{
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%) rotate(-2deg);
+    width:52px; height:20px; background:rgba(232,193,112,0.55);
+    box-shadow:0 2px 4px rgba(0,0,0,0.2);
+  }
+  .photo-slot{
+    width:100%; aspect-ratio:1/1; background:#e4d4c3;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    color:#9c8674; font-size:0.75rem; text-align:center; padding:0.5rem;
+    font-family:'Jost', sans-serif;
+  }
+  .photo-slot img{width:100%; height:100%; object-fit:cover;}
+  .polaroid figcaption{
+    font-family:'Caveat', cursive; font-size:1.1rem; color:#4a3a3f;
+    text-align:center; margin-top:8px;
+  }
+  .polaroid input[type=file]{display:none;}
+
+  .reasons{
+    background:rgba(245,233,220,0.04); border:1px solid rgba(232,193,112,0.18);
+    border-radius:10px; padding:2rem 1.6rem; margin-bottom:3rem;
+  }
+  .reasons h3{
+    font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--blush);
+    font-size:1.3rem; margin-bottom:1rem; text-align:center;
+  }
+  .reasons ul{list-style:none;}
+  .reasons li{
+    font-family:'Cormorant Garamond', serif; font-size:1.1rem; line-height:1.6;
+    padding:0.5rem 0; border-bottom:1px dashed rgba(245,233,220,0.12);
+    display:flex; gap:0.7rem;
+  }
+  .reasons li:last-child{border-bottom:none;}
+  .reasons li::before{content:'❀'; color:var(--rose); flex-shrink:0;}
+
+  footer{
+    text-align:center; padding:6vh 6vw 8vh; color:var(--mauve); font-size:0.85rem;
+  }
+  footer .fin{
+    font-family:'Caveat', cursive; font-size:1.6rem; color:var(--gold); display:block; margin-bottom:0.6rem;
+  }
