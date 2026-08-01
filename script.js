@@ -29,9 +29,9 @@
   // ============================================================
   const photos = [
   { src: 'Us.jpg', caption: 'us, on a good day' },
-  { src: 'pl.jpg', caption: 'that one place we loved' },
+  { src: 'Pl.jpg', caption: 'that one place we loved' },
   { src: 'Silly.jpg', caption: "silly Me, don't judge" },
-  { src: 'Favourite.jpg', caption: 'my favorite' }
+  { src: 'Favourite .jpg', caption: 'my favorite' }
 ];
 
   const scrapbook = document.getElementById('scrapbook');
