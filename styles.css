@@ -20,7 +20,6 @@
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
   }
 
-  /* ambient petals */
   #petals{position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;}
   .petal{
     position:absolute; top:-5%; font-size:14px; opacity:0.55;
@@ -36,7 +35,6 @@
 
   section{position:relative; z-index:2; padding:8vh 6vw; max-width:720px; margin:0 auto;}
 
-  /* ---- Letter section ---- */
   #letter-section{
     min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
   }
@@ -96,7 +94,6 @@
     margin-top:1.5rem; text-align:right; font-style:normal;
   }
 
-  /* ---- Divider ---- */
   .divider{
     display:flex; align-items:center; gap:1rem; padding:4vh 6vw; max-width:520px; margin:0 auto;
   }
@@ -105,7 +102,7 @@
     font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.1rem; color:var(--rose); white-space:nowrap;
   }
 
-  /* ---- Celebration section ---- */
+ 
   #celebrate h2{
     font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
     font-size:clamp(1.8rem, 6vw, 2.6rem); text-align:center; color:var(--gold); margin-bottom:0.6rem;
