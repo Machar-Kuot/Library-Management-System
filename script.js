@@ -21,35 +21,47 @@
     letter.classList.add('show');
   });
 
-  // polaroids with local photo upload (client-side only, nothing leaves the browser)
-  const captions = [
-    'us, on a good day',
-    'that one place we loved',
-    "silly one, don't judge",
-    'my favorite'
+  // ============================================================
+  // PUT YOUR PHOTOS HERE.
+  // 1. Put your image files in the SAME folder as this script.js
+  // 2. Set "src" to the exact filename (e.g. "photo1.jpg")
+  // 3. Leave src as "" to keep the tap-to-upload placeholder instead
+  // ============================================================
+  const photos = [
+    { src: 'us.jpg', caption: 'us, on a good day' },
+    { src: 'pl.jpg', caption: 'that one place we loved' },
+    { src: 'Silly.jpg', caption: "silly Me, don't judge" },
+    { src: 'Favourite.jpg', caption: 'my favorite' }
   ];
+
   const scrapbook = document.getElementById('scrapbook');
-  captions.forEach((cap, i) => {
+  photos.forEach((photo, i) => {
     const fig = document.createElement('figure');
     fig.className = 'polaroid';
+
+    const slotContent = photo.src
+      ? `<div class="photo-slot" id="slot-${i}"><img src="${photo.src}" alt="${photo.caption}"></div>`
+      : `<label class="photo-slot" id="slot-${i}" for="file-${i}">tap to add a photo</label><input type="file" accept="image/*" id="file-${i}">`;
+
     fig.innerHTML = `
       <div class="tape"></div>
-      <label class="photo-slot" id="slot-${i}">tap to add a photo</label>
-      <input type="file" accept="image/*" id="file-${i}">
-      <figcaption>${cap}</figcaption>
+      ${slotContent}
+      <figcaption>${photo.caption}</figcaption>
     `;
     scrapbook.appendChild(fig);
-    const input = fig.querySelector('input');
-    const slot = fig.querySelector('.photo-slot');
-    slot.setAttribute('for', `file-${i}`);
-    input.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        slot.innerHTML = `<img src="${ev.target.result}" alt="${cap}">`;
-      };
-      reader.readAsDataURL(file);
-    });
-  });
 
+    // only wire up the upload fallback if no permanent photo was set
+    if(!photo.src){
+      const input = fig.querySelector('input');
+      const slot = fig.querySelector('.photo-slot');
+      input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          slot.outerHTML = `<div class="photo-slot"><img src="${ev.target.result}" alt="${photo.caption}"></div>`;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  });
